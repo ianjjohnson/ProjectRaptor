@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import smptlib
+import smtplib
 import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -23,10 +23,13 @@ def sendMessage(body):
 	mailServer = smtplib.SMTP("smtp.gmail.com:587")
 	mailServer.starttls()
 	mailServer.login("ianlinuxserver@gmail.com", "LinuxMint2015!")
-	mailServer.sendMail("ianlinuxserver@gmail.com", "3038153710@mms.att.net", body)
+
+	
+	for i in range(5):
+		mailServer.sendmail("ianlinuxserver@gmail.com", "3038153710@mms.att.net", body)
 
 	mailServer.quit()
 	print("Sent Text:" + body)
 
-sendMessage("Swag on Rye!")
+sendMessage("Swiggity Swiggity Swag on Rye!")
 	
