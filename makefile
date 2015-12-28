@@ -15,3 +15,7 @@ main.o: main.cpp
 
 clean:
 	rm *.o && rm $(EXE)
+
+commit:
+	git commit -a -m "$(msg)"
+	git push origin master
