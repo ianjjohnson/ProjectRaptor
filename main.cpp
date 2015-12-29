@@ -32,19 +32,19 @@ int main(int argc, char *argv[]) {
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
         if( currentKeyStates[ SDL_SCANCODE_UP ] )
         {
-            mario.boundingBox.y = mario.boundingBox.y - 2;
+            mario.boundingBox.y = mario.boundingBox.y - 1;
         }
         if( currentKeyStates[ SDL_SCANCODE_DOWN ] )
         {
-            mario.boundingBox.y = mario.boundingBox.y + 2;
+            mario.boundingBox.y = mario.boundingBox.y + 1;
         }
         if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
         {
-            mario.boundingBox.x = mario.boundingBox.x - 2;
+            mario.boundingBox.x = mario.boundingBox.x - 1;
         }
         if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
         {
-            mario.boundingBox.x = mario.boundingBox.x + 2;
+            mario.boundingBox.x = mario.boundingBox.x + 1;
         }
         
         SDL_RenderClear(renderer);
