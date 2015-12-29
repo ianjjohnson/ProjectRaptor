@@ -1,13 +1,12 @@
-#include <SDL2/SDL.h>
-#include <iostream>
-#include <string>
-
 using namespace std;
 
 class GameObject{
     public:
-        GameObject(string fileName);
+        GameObject(string, SDL_Renderer*);
         ~GameObject();
-        SDL_Texture* texture;    
-        double xPos,yPos;
+        void loadTexture(string texturePath);
+        SDL_Texture* texture;  
+        SDL_Renderer* mainRenderer;  
+        SDL_Rect boundingBox;
+        void draw();
 };

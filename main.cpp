@@ -3,11 +3,12 @@
 #include <iostream>
 #include <string>
 #include "main.h"
+#include "GameObject.h"
 
 using namespace std;
 
-const int WIDTH = 640;
-const int HEIGHT = 480;
+const int WIDTH = 864;
+const int HEIGHT = 648;
 
 
 int main(int argc, char *argv[]) {
@@ -15,37 +16,61 @@ int main(int argc, char *argv[]) {
 	
     init();
 
+    GameObject mario("mario.png", renderer);
+
     loadMedia();
     //SDL_BlitSurface(helloWorldSurface,NULL,backgroundSurface,NULL);
     //SDL_UpdateWindowSurface(window);
+    bool quit = false;
+    SDL_Event e;
+
+    while(!quit){
+        while(SDL_PollEvent(&e) != 0){
+            if(e.type == SDL_QUIT)
+                quit = true;
+        }
+        const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
+        if( currentKeyStates[ SDL_SCANCODE_UP ] )
+        {
+            mario.boundingBox.y = mario.boundingBox.y - 2;
+        }
+        if( currentKeyStates[ SDL_SCANCODE_DOWN ] )
+        {
+            mario.boundingBox.y = mario.boundingBox.y + 2;
+        }
+        if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
+        {
+            mario.boundingBox.x = mario.boundingBox.x - 2;
+        }
+        if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
+        {
+            mario.boundingBox.x = mario.boundingBox.x + 2;
+        }
+        
+        SDL_RenderClear(renderer);
     
+        mario.draw();
+        //Render objects
+        //SDL_RenderCopy(renderer,texture,NULL,&destRect);
 
-    SDL_Delay(2000);
- 
-    SDL_RenderClear(renderer);
-    SDL_RenderCopy(renderer,texture,NULL,&destRect);
-    SDL_RenderPresent(renderer);
+        SDL_RenderPresent(renderer);
+    }    
 
-    SDL_Delay(2000);
 
     close();
 
 	return 0;
 }
 
+
 bool init() {
 
-    destRect.x=0;
-    destRect.y=0;
-    destRect.w=100;
-    destRect.h=100;
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 		cout << "Error!\n";
 
 	else {
 
-        //SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"1");
-
+        SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"1");
 		window = SDL_CreateWindow("Game",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,WIDTH,HEIGHT,SDL_WINDOW_SHOWN);
 		if(window == NULL)
 			cout << "Error\n";
@@ -70,35 +95,11 @@ bool init() {
     return true;
 }
 
-bool loadMedia() {
-    helloWorldSurface = SDL_LoadBMP("hello_world.bmp");
-    texture = loadTexture("texture.png"); 
-    if( texture == NULL )
-    {
-        printf( "Failed to load texture image!\n" );
-    }
+bool loadMedia(){
     return true;
 }
 
-SDL_Texture* loadTexture(string texturePath) {
-    SDL_Texture* newTexture= NULL;
-    SDL_Surface* loadedSurface = IMG_Load(texturePath.c_str());
-    if( loadedSurface == NULL )
-    {
-        printf( "Unable to load image %s! SDL_image Error: %s\n", texturePath.c_str(), IMG_GetError() );
-    }
-    newTexture = SDL_CreateTextureFromSurface(renderer,loadedSurface);
-    if( newTexture == NULL )
-    {
-        printf( "Unable to create texture from %s! SDL Error: %s\n", texturePath.c_str(), SDL_GetError() );
-    }
-    SDL_FreeSurface(loadedSurface);
-    return newTexture;
-}
-
 void close() {
-    SDL_FreeSurface(helloWorldSurface);
-    helloWorldSurface = NULL;
 	SDL_DestroyWindow(window);
     window = NULL;
 	SDL_Quit();
