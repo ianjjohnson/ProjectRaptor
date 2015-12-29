@@ -10,4 +10,4 @@ class GameObject{
         ~GameObject();
         SDL_Texture* texture;    
         double xPos,yPos;
-}
+};
