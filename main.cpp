@@ -4,6 +4,7 @@
 #include <string>
 #include "main.h"
 #include "GameObject.h"
+#include "Projectile.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ int main(int argc, char *argv[]) {
     init();
 
     GameObject mario("mario.png", renderer);
-
+    Projectile* p = new Projectile("mario.png", renderer, 1, 1);
     loadMedia();
     //SDL_BlitSurface(helloWorldSurface,NULL,backgroundSurface,NULL);
     //SDL_UpdateWindowSurface(window);
@@ -28,6 +29,10 @@ int main(int argc, char *argv[]) {
         while(SDL_PollEvent(&e) != 0){
             if(e.type == SDL_QUIT)
                 quit = true;
+	    if(e.type == SDL_MOUSEBUTTONDOWN){
+		delete p;
+ 	    	p = new Projectile("mario.png", renderer, 1, 1);
+	    }
         }
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
         if( currentKeyStates[ SDL_SCANCODE_UP ] )
@@ -48,8 +53,11 @@ int main(int argc, char *argv[]) {
         }
         
         SDL_RenderClear(renderer);
-    
-        mario.draw();
+   
+	p->update();
+ 
+	p->draw();        
+	mario.draw();
         //Render objects
         //SDL_RenderCopy(renderer,texture,NULL,&destRect);
 

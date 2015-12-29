@@ -1,3 +1,9 @@
+#ifndef _GAMEOBJECT_H_
+#define _GAMEOBJECT_H_
+
+#include <SDL2_image/SDL_image.h>
+#include <string>
+
 using namespace std;
 
 class GameObject{
@@ -10,3 +16,5 @@ class GameObject{
         SDL_Rect boundingBox;
         void draw();
 };
+
+#endif
