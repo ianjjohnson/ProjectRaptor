@@ -16,7 +16,8 @@ class Projectile : public GameObject{
     public:
 	Projectile(string, SDL_Renderer*, double, double, double, double);
 	
-	double xVel, yVel;
+	double initX, initY, xVel, yVel;
+    int lifeTime;
 	void update();
 };
 
