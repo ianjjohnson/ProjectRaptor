@@ -42,8 +42,8 @@ void GameObject::loadTexture(string texturePath) {
 
 void GameObject::draw(){
 
-	int x, y;
-	SDL_GetMouseState(&x, &y);
+	//int x, y;
+	//SDL_GetMouseState(&x, &y);
 
 	//double angle = atan2(y-boundingBox.y + boundingBox.h/2, x - boundingBox.x + boundingBox.w/2) * 180 / 3.1415926535897932;
 

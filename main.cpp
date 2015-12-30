@@ -10,18 +10,21 @@
 #include "GameObject.h"
 #include "Projectile.h"
 #include "Player.h"
+#include "TileDrawer.h"
+#include "Tile.h"
 
 using namespace std;
 
-const int WIDTH = 864;
-const int HEIGHT = 648;
+const int WIDTH = 832;
+const int HEIGHT = 640;
 
 
 int main(int argc, char *argv[]) {
     init();
 
     Player mario("mario.png", renderer, 0, 0);
-    //Projectile* p = new Projectile("mario.png", renderer, 0, 0, 1, 1);
+    TileDrawer tileDrawer(10, 5, renderer);
+
     loadMedia();
 
     bool quit = false;
@@ -57,14 +60,10 @@ int main(int argc, char *argv[]) {
         
         SDL_RenderClear(renderer);
    
-	//p->update();
- 
-	//p->draw();        
+    tileDrawer.drawTiles();
 	mario.draw();
-        //Render objects
-        //SDL_RenderCopy(renderer,texture,NULL,&destRect);
 
-        SDL_RenderPresent(renderer);
+    SDL_RenderPresent(renderer);
     }    
 
 

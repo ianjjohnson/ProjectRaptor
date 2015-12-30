@@ -11,6 +11,7 @@ Projectile::Projectile(string fileName, SDL_Renderer* r, double x, double y, dou
 }
 
 void Projectile::update(){
+    //uses life time counter for more accurate integer rounding
     lifeTime++;
     boundingBox.x = (int)(lifeTime*xVel) + initX;
     boundingBox.y = (int)(lifeTime*yVel) + initY;
