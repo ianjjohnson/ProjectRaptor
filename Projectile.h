@@ -14,7 +14,7 @@ using namespace std;
 
 class Projectile : public GameObject{
     public:
-	Projectile(string, SDL_Renderer*, double, double);
+	Projectile(string, SDL_Renderer*, double, double, double, double);
 	
 	double xVel, yVel;
 	void update();

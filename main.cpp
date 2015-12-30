@@ -9,6 +9,7 @@
 #include "main.h"
 #include "GameObject.h"
 #include "Projectile.h"
+#include "Player.h"
 
 using namespace std;
 
@@ -17,15 +18,12 @@ const int HEIGHT = 648;
 
 
 int main(int argc, char *argv[]) {
-	//cout << "Hello, world";
-	
     init();
 
-    GameObject mario("mario.png", renderer);
-    Projectile* p = new Projectile("mario.png", renderer, 1, 1);
+    Player mario("mario.png", renderer, 0, 0);
+    //Projectile* p = new Projectile("mario.png", renderer, 0, 0, 1, 1);
     loadMedia();
-    //SDL_BlitSurface(helloWorldSurface,NULL,backgroundSurface,NULL);
-    //SDL_UpdateWindowSurface(window);
+
     bool quit = false;
     SDL_Event e;
 
@@ -33,10 +31,11 @@ int main(int argc, char *argv[]) {
         while(SDL_PollEvent(&e) != 0){
             if(e.type == SDL_QUIT)
                 quit = true;
-	    if(e.type == SDL_MOUSEBUTTONDOWN){
-		delete p;
- 	    	p = new Projectile("mario.png", renderer, 1, 1);
-	    }
+            if(e.type == SDL_MOUSEBUTTONDOWN){
+                //delete p;
+                //p = new Projectile("mario.png", renderer, 0, 0, 1, 1);
+                mario.shoot();
+            }
         }
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
         if( currentKeyStates[ SDL_SCANCODE_UP ] )
@@ -58,9 +57,9 @@ int main(int argc, char *argv[]) {
         
         SDL_RenderClear(renderer);
    
-	p->update();
+	//p->update();
  
-	p->draw();        
+	//p->draw();        
 	mario.draw();
         //Render objects
         //SDL_RenderCopy(renderer,texture,NULL,&destRect);

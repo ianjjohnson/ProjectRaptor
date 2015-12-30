@@ -15,9 +15,9 @@ using namespace std;
 
 #include "GameObject.h"
 
-GameObject::GameObject(string fileName, SDL_Renderer* r){
-	boundingBox.x = 0;
-	boundingBox.y = 0;
+GameObject::GameObject(string fileName, SDL_Renderer* r, double initX, double initY){
+	boundingBox.x = initX;
+	boundingBox.y = initY;
 	boundingBox.w = 32;
 	boundingBox.h = 32;
 
@@ -45,9 +45,10 @@ void GameObject::draw(){
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 
-	double angle = atan2(y-boundingBox.y + boundingBox.h/2, x - boundingBox.x + boundingBox.w/2) * 180 / 3.1415926535897932;
+	//double angle = atan2(y-boundingBox.y + boundingBox.h/2, x - boundingBox.x + boundingBox.w/2) * 180 / 3.1415926535897932;
 
-	SDL_RenderCopyEx(mainRenderer, texture, NULL, &boundingBox, angle + 90,  NULL, SDL_FLIP_NONE);
+    SDL_RenderCopy(mainRenderer, texture, NULL, &boundingBox);
+	//SDL_RenderCopyEx(mainRenderer, texture, NULL, &boundingBox, angle + 90,  NULL, SDL_FLIP_NONE);
 }
 
 GameObject::~GameObject(){
