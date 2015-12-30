@@ -3,7 +3,11 @@
 
 #include "GameObject.h"
 #include <string>
-#include <SDL2_image/SDL_image.h>
+#ifdef __linux__
+    #include <SDL2/SDL_image.h>
+#elif __APPLE__
+    #include <SDL2_image/SDL_image.h>
+#endif
 #include <SDL2/SDL.h>
 
 using namespace std;

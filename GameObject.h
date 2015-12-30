@@ -1,7 +1,11 @@
 #ifndef _GAMEOBJECT_H_
 #define _GAMEOBJECT_H_
 
-#include <SDL2_image/SDL_image.h>
+#ifdef __linux__
+    #include <SDL2/SDL_image.h>
+#elif __APPLE__
+    #include <SDL2_image/SDL_image.h>
+#endif
 #include <string>
 
 using namespace std;
