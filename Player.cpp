@@ -24,5 +24,6 @@ void Player::draw(){
 
 void Player::shoot() {
     delete p;
-    p = new Projectile("mario.png", mainRenderer, boundingBox.x, boundingBox.y, 1, 3.1415926535897932*angle/180);
+    double radians = 3.1415926535897932*angle/180;
+    p = new Projectile("mario.png", mainRenderer, boundingBox.x, boundingBox.y, 2*cos(radians), 2*sin(radians));
 }

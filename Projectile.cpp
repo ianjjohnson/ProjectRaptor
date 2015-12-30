@@ -8,6 +8,7 @@ Projectile::Projectile(string fileName, SDL_Renderer* r, double initX, double in
 }
 
 void Projectile::update(){
+    //We might want to change this to x=time*xVel,y=time*yVel
     boundingBox.x = (int)(boundingBox.x + xVel);
     boundingBox.y = (int)(boundingBox.y + yVel);
 }
