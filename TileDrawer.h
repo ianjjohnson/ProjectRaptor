@@ -9,6 +9,7 @@ class TileDrawer {
     public:
         TileDrawer(int r, int c, SDL_Renderer*);
         void drawTiles();
+        void panTiles(int, int);
     private:
         vector<Tile*> tiles;
         int rows,columns;

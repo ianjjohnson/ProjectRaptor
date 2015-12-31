@@ -18,8 +18,8 @@ using namespace std;
 GameObject::GameObject(string fileName, SDL_Renderer* r, double initX, double initY){
 	boundingBox.x = initX;
 	boundingBox.y = initY;
-	boundingBox.w = 32;
-	boundingBox.h = 32;
+	boundingBox.w = 64;
+	boundingBox.h = 64;
 
 	mainRenderer = r;
 
@@ -40,7 +40,12 @@ void GameObject::loadTexture(string texturePath) {
     SDL_FreeSurface(loadedSurface);
 }
 
-void GameObject::draw(){
+void GameObject::move(int dx, int dy) {
+    boundingBox.x = boundingBox.x + dx;
+    boundingBox.y = boundingBox.y + dy;
+}
+
+void GameObject::draw() {
 
 	//int x, y;
 	//SDL_GetMouseState(&x, &y);

@@ -17,13 +17,14 @@ using namespace std;
 
 const int WIDTH = 832;
 const int HEIGHT = 640;
+const SDL_Rect PAN_RECT = {20,20,WIDTH-40,HEIGHT-40};
 
 
 int main(int argc, char *argv[]) {
     init();
 
-    Player mario("mario.png", renderer, 0, 0);
-    TileDrawer tileDrawer(10, 5, renderer);
+    Player mario("mario.png", renderer, WIDTH/2, HEIGHT/2);
+    TileDrawer tileDrawer(10, 13, renderer);
 
     loadMedia();
 
@@ -43,19 +44,35 @@ int main(int argc, char *argv[]) {
         const Uint8* currentKeyStates = SDL_GetKeyboardState( NULL );
         if( currentKeyStates[ SDL_SCANCODE_UP ] )
         {
-            mario.boundingBox.y = mario.boundingBox.y - 1;
+            mario.move(0,-1);
+            if(mario.boundingBox.y < PAN_RECT.y) {
+                tileDrawer.panTiles(0,1);
+                mario.move(0,1);
+            }
         }
         if( currentKeyStates[ SDL_SCANCODE_DOWN ] )
         {
-            mario.boundingBox.y = mario.boundingBox.y + 1;
+            mario.move(0,1);
+            if(mario.boundingBox.y + mario.boundingBox.h > PAN_RECT.y + PAN_RECT.h) {
+                tileDrawer.panTiles(0,-1);
+                mario.move(0,-1);
+            }
         }
         if( currentKeyStates[ SDL_SCANCODE_LEFT ] )
         {
-            mario.boundingBox.x = mario.boundingBox.x - 1;
+            mario.move(-1,0);
+            if(mario.boundingBox.x < PAN_RECT.x) {
+                tileDrawer.panTiles(1,0);
+                mario.move(1,0);
+            }
         }
         if( currentKeyStates[ SDL_SCANCODE_RIGHT ] )
         {
-            mario.boundingBox.x = mario.boundingBox.x + 1;
+            mario.move(1,0);
+            if(mario.boundingBox.x + mario.boundingBox.w > PAN_RECT.x + PAN_RECT.w) {
+                tileDrawer.panTiles(-1,0);
+                mario.move(-1,0);
+            }
         }
         
         SDL_RenderClear(renderer);

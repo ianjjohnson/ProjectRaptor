@@ -18,6 +18,7 @@ class GameObject{
         SDL_Texture* texture;  
         SDL_Renderer* mainRenderer;  
         SDL_Rect boundingBox;
+        void move(int, int);
         virtual void draw();
 };
 
