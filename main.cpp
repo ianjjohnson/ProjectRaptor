@@ -36,8 +36,6 @@ int main(int argc, char *argv[]) {
             if(e.type == SDL_QUIT)
                 quit = true;
             if(e.type == SDL_MOUSEBUTTONDOWN){
-                //delete p;
-                //p = new Projectile("mario.png", renderer, 0, 0, 1, 1);
                 mario.shoot();
             }
         }
