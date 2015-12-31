@@ -4,7 +4,7 @@
 #elif __APPLE__
     #include <SDL2_image/SDL_image.h>
 #endif
-#include <iostream>
+#include <stdio.h>
 #include <string>
 #include "main.h"
 #include "GameObject.h"
@@ -93,14 +93,14 @@ int main(int argc, char *argv[]) {
 bool init() {
 
 	if(SDL_Init(SDL_INIT_VIDEO) < 0)
-		cout << "Error!\n";
+        printf("Error!\n");
 
 	else {
 
         SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY,"1");
 		window = SDL_CreateWindow("Game",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,WIDTH,HEIGHT,SDL_WINDOW_SHOWN);
 		if(window == NULL)
-			cout << "Error\n";
+            printf("Error!\n");
 		else {
 
             renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);

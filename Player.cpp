@@ -5,14 +5,14 @@
     #include <SDL2_image/SDL_image.h>
 #endif
 #include <SDL2/SDL.h>
-#include <iostream>
+#include <stdio.h>
 
 
 void Player::draw(){
 	int x, y;
 	SDL_GetMouseState(&x, &y);
 
-	angle = atan2(y-boundingBox.y + boundingBox.h/2, x - boundingBox.x + boundingBox.w/2) * 180 / 3.1415926535897932;
+	angle = atan2(y-(boundingBox.y + ((double)boundingBox.h)/2.0), x - (boundingBox.x + (double)(boundingBox.w)/2.0)) * 180 / 3.1415926535897932;
 
 	SDL_RenderCopyEx(mainRenderer, texture, NULL, &boundingBox, angle + 90,  NULL, SDL_FLIP_NONE);
 
@@ -24,6 +24,7 @@ void Player::draw(){
 
 void Player::shoot() {
     delete p;
+    printf("Angle:%f\n",angle);
     double radians = 3.1415926535897932*angle/180;
     p = new Projectile("mario.png", mainRenderer, boundingBox.x, boundingBox.y, 2*cos(radians), 2*sin(radians));
 }
