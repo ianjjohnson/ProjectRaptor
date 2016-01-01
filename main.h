@@ -1,3 +1,6 @@
+#ifndef _MAIN_H_
+#define _MAIN_H_
+
 const int WIDTH = 832;
 const int HEIGHT = 640;
 
@@ -10,3 +13,4 @@ bool loadMedia();
 
 void close();
 
+#endif

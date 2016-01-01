@@ -8,9 +8,10 @@ class Chunk {
         Chunk(int, int, int, int, SDL_Renderer*);
         void drawTiles();
         void panTiles(int, int);
+        int x, y, width, height, rows, columns;
+        bool* hasNeighbor;
     private:
         vector<Tile*> tiles;
-        int x, y, width, height, rows, columns;
         SDL_Renderer* mainRenderer;
 };
 

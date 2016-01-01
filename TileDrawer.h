@@ -15,5 +15,7 @@ class TileDrawer {
         int numChunks;
         int rows,columns;
         SDL_Renderer* mainRenderer;
+        Chunk* currentChunk;
+        void loadChunks();
 };
 #endif
