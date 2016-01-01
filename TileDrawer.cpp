@@ -1,20 +1,22 @@
 #include "TileDrawer.h"
 #include <stdio.h>
 
-TileDrawer::TileDrawer(int r, int c, SDL_Renderer* renderer) : rows(r), columns(c),mainRenderer(renderer) {
-    //tiles.push_back(Tile("grass.png",mainRenderer,0,0));
-    //tiles.push_back(new Tile("grass.png",mainRenderer,0,0));
-    for(int i=0;i<rows*columns;i++)
-        tiles.push_back(new Tile("grass_border.png",mainRenderer,(i%columns)*64,(i/columns)*64));
+TileDrawer::TileDrawer(int r, int c, SDL_Renderer* renderer) : rows(r), comumns(c), mainRenderer(renderer) {
+    chunks.push_back(new Chunk(0, 0, rows, columns, mainRenderer));
+    numChunks = 1;
 }
 
 void TileDrawer::drawTiles() {
-    //printf("rows:%d cols:%d",rows,columns);
-    for(int i=0;i<rows*columns;i++)
-        tiles[i]->draw();
+    for(int i=0;i<numChunks;i++)
+        chunks[i]->drawTiles();
 }
 
 void TileDrawer::panTiles(int dx, int dy) {
-   for(int i=0;i<rows*columns;i++)
-       tiles[i]->move(dx, dy);
+   for(int i=0;i<numChunks;i++)
+       chunks[i]->panTiles(dx, dy);
+   //NOTE: fix so the current chunk is found rather than chunks[0]
+   if(chunks[0].y > 0)
+       chunks.push_back(new Chunk(chunks[0].y-64*rows,chunks[0].x));
+   //NOTE: finish
+   //if(chunks[0].y + chunks[0].height < 
 }

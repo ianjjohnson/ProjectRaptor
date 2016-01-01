@@ -1,7 +1,7 @@
 #ifndef _TILE_DRAWER_H_
 #define _TILE_DRAWER_H_
 #include <vector>
-#include "Tile.h"
+#include "Chunk.h"
 
 using namespace std;
 
@@ -11,7 +11,8 @@ class TileDrawer {
         void drawTiles();
         void panTiles(int, int);
     private:
-        vector<Tile*> tiles;
+        vector<Chunk*> chunks;
+        int numChunks;
         int rows,columns;
         SDL_Renderer* mainRenderer;
 };

@@ -15,8 +15,6 @@
 
 using namespace std;
 
-const int WIDTH = 832;
-const int HEIGHT = 640;
 const SDL_Rect PAN_RECT = {20,20,WIDTH-40,HEIGHT-40};
 
 
